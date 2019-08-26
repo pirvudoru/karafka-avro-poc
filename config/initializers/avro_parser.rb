@@ -7,18 +7,20 @@ class AvroParser
   end
 
   def parse(content)
-    avro.decode(content)
+    self.class.avro.decode(content)
   end
 
   def generate(content)
-    avro.encode(content, schema_name: @schema_name)
+    self.class.avro.encode(content, schema_name: @schema_name)
   end
 
-  def avro
-    @avro ||= AvroTurf::Messaging.new(
-      schemas_path: 'app/schemas/',
-      namespace: 'com.heartmonitor',
-      registry_url: 'http://localhost:8081'
-    )
+  class << self
+    def avro
+      @avro ||= AvroTurf::Messaging.new(
+        schemas_path: 'app/schemas/',
+        namespace: 'com.heartmonitor',
+        registry_url: 'http://localhost:8081'
+      )
+    end
   end
 end
