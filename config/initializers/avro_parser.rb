@@ -11,9 +11,6 @@ class AvroParser
   end
 
   def generate(content)
-    p "Generating "
-    p content
-
     avro.encode(content, schema_name: @schema_name)
   end
 
@@ -25,6 +22,3 @@ class AvroParser
     )
   end
 end
-
-
-AvroTurf::ConfluentSchemaRegistry
