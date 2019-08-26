@@ -1,0 +1,11 @@
+{
+  "name": "heartbeat",
+  "namespace": "com.heartmonitor",
+  "type": "record",
+  "fields": [
+    {
+      "name": "position",
+      "type": ["int", "null"]
+    }
+  ]
+}

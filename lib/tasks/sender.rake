@@ -3,17 +3,16 @@
 namespace :waterdrop do
   desc 'Generates messages to Kafka server'
   task :send do
-    message = AvroParser.new('heartbeatCommandValue', '1')
-                        .generate(
-                          'name' => 'somename',
-                          'number1' => 42,
-                          'number2' => 4.2
-                        )
-    key = AvroParser.new('heartbeatCommandKey', '1')
-                    .generate('resourceType' => 'movie',
-                              'resourceId' => '1234',
-                              'userId' => '42')
+    key = AvroParser.new('heartbeatKey')
+                    .generate(
+                      'resourceType' => 'movie',
+                      'resourceId' => '42',
+                      'userId' => nil,
+                      'deviceId' => SecureRandom.hex
+                    )
+    message = AvroParser.new('heartbeat')
+                        .generate('position' => 13)
 
-    WaterDrop::SyncProducer.call(message, topic: 'heartbeat_commands', key: key)
+    WaterDrop::SyncProducer.call(message, topic: 'heartbeats', key: key)
   end
 end

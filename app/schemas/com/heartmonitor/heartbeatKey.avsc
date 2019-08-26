@@ -1,0 +1,23 @@
+{
+  "name": "heartbeatKey",
+  "namespace": "com.heartmonitor",
+  "type": "record",
+  "fields": [
+    {
+      "name": "resourceType",
+      "type": "string"
+    },
+    {
+      "name": "resourceId",
+      "type": "string"
+    },
+    {
+      "name": "userId",
+      "type": ["string", "null"]
+    },
+    {
+      "name": "deviceId",
+      "type": "string"
+    }
+  ]
+}

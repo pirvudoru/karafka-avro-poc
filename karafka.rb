@@ -13,7 +13,7 @@ class KarafkaApp < Karafka::App
     config.kafka.seed_brokers = [ENV['KAFKA_HOST'] || 'kafka://localhost:9092']
     config.client_id = 'karafka_on_rails'
     config.backend = :inline
-    # config.batch_fetching = true
+    config.batch_fetching = true
     # config.logger = Rails.logger
   end
 
@@ -28,10 +28,10 @@ class KarafkaApp < Karafka::App
   # Karafka.monitor.subscribe(Karafka::Instrumentation::ProctitleListener.new)
 
   consumer_groups.draw do
-    consumer_group :heartbeat_command_consumers do
-      topic :heartbeat_commands do
-        consumer ::HeartbeatCommandConsumer
-        parser AvroParser.new('heartbeatCommandValue', 1)
+    consumer_group :heartbeats do
+      topic :heartbeats do
+        consumer ::HeartbeatConsumer
+        parser AvroParser.new('heartbeat')
       end
     end
   end

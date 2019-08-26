@@ -2,9 +2,8 @@ require 'avro_turf'
 require 'avro_turf/messaging'
 
 class AvroParser
-  def initialize(schema_subject, schema_version)
-    @schema_subject = schema_subject
-    @schema_version = schema_version
+  def initialize(schema_name)
+    @schema_name = schema_name
   end
 
   def parse(content)
@@ -15,11 +14,12 @@ class AvroParser
     p "Generating "
     p content
 
-    avro.encode(content, subject: @schema_subject, version: @schema_version)
+    avro.encode(content, schema_name: @schema_name)
   end
 
   def avro
     @avro ||= AvroTurf::Messaging.new(
+      schemas_path: 'app/schemas/',
       namespace: 'com.heartmonitor',
       registry_url: 'http://localhost:8081'
     )
