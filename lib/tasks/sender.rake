@@ -11,7 +11,7 @@ namespace :waterdrop do
                       'deviceId' => SecureRandom.hex
                     )
     message = AvroParser.new('heartbeat')
-                        .generate('position' => 13)
+                        .generate('position' => 13, 'newPosition' => 42)
 
     WaterDrop::SyncProducer.call(message, topic: 'heartbeats', key: key)
   end

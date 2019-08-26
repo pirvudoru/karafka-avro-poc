@@ -6,6 +6,11 @@
     {
       "name": "position",
       "type": ["int", "null"]
+    },
+    {
+      "name": "newKey",
+      "type": ["int", "null"],
+      "default": 0
     }
   ]
 }
